@@ -9,19 +9,19 @@ function Particle() {
 	dx = random(-1, 1);
 	dy = random(-1, 1);
 	r = random(3,10);
-	
+
 	x = random(0+r, width-r);
 	y = random(0+r, height-r);
-	
+
 	this.color = random(colorArray)
-	
+
 	this.pos = createVector(x,y);
 	this.vel = createVector(dx,dy);
 	this.r = r;
 	this.oriR = r;
-	
+
 	this.vel.setMag(0.1);
-	
+
 	this.update = function() {
 		if (this.pos.x+this.r >= width || this.pos.x-this.r <= 0) {
 			this.vel.x = -this.vel.x;
@@ -29,19 +29,19 @@ function Particle() {
 		if (this.pos.y+this.r >= height || this.pos.y-this.r <= 0) {
 			this.vel.y = -this.vel.y;
 		}
-		
+
 		this.pos.add(this.vel);
-		
+
 		mousePos = createVector(mouseX, mouseY);
-    var dist = mousePos.dist(this.pos);
-		
-    if (dist < area && this.r < maxRadius) {
-    	this.r += 2; 
-    } else if (dist > area && this.oriR <= this.r) {
-    	this.r -= 1; 
-    }	
+		var dist = mousePos.dist(this.pos);
+
+		if (dist < area && this.r < maxRadius) {
+			this.r += 2;
+		} else if (dist > area && this.oriR <= this.r) {
+			this.r -= 1;
+		}
 	}
-	
+
 	this.show = function() {
 		noStroke();
 	  fill(this.color);
